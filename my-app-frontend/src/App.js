@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react'
 import './App.css';
+import DayDisplay from "./components/DayDisplay.js"
+
+
+
 
 function App() {
+  const [days, setDays] = useState([])
+
+  useEffect(() =>{
+    fetch(`http://localhost:9292/days`)
+      .then(res => res.json())
+      .then(data => setDays(data))
+  }, [])
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <DayDisplay days={days}/>
+  )
+  
+
+
+
+
+
+
+
 }
+
 
 export default App;
