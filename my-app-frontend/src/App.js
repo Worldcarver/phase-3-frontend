@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import MealDisplay from "./components/MealDisplay.js"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
@@ -23,7 +22,7 @@ function App() {
 
 
   return (
-    <MealDisplay meals={meals}/>
+    <MealDisplay meals={meals} dishes={dishes}/>
   )
   
 
