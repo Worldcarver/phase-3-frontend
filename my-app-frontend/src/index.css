@@ -22,15 +22,15 @@ img {
   width: 300px;
 }
 .row {
-  grid-column-start: 1;
-  grid-column-end: 5;
+  grid-column-start: none;
+  grid-column-end: none;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   display: grid;
-  gap: 40px 10px;
+  gap: 50px;
   list-style: none;
   justify-content: center;
 }
-.row.fav-dest-row {
+/* .row.fav-dest-row {
   padding: 1rem;
   grid-column-start: 1;
   grid-column-end: 5;
@@ -39,4 +39,4 @@ img {
   gap: 40px 10px;
   list-style: none;
   justify-content: center;
-}
+} */

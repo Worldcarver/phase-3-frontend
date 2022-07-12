@@ -4,7 +4,7 @@ import FoodCard from "./FoodCard"
 
 function MealDisplay({  dishes }){
     return(
-        <div className ="ui four column grid">
+        <div className ="ui five column grid">
             <ul className="row">
                 {/* {meals.map((meal) =>(
                     <FoodCard key = {meal.id} meal={meal}/>
