@@ -1,7 +1,20 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+// import MealDisplay from './MealDisplay'
 
 
 function FoodCard({ dish }) {
+    const [meal, setMeal] = useState([])
+   
+    useEffect(() =>{
+        fetch(`http://localhost:9292/dishes/${dish.id}/meal`)
+          .then(res => res.json())
+          .then(data => setMeal(data))
+      }, [dish.id])
+
+    
+
+
+
     return (
         <li className="card">
             <div className="cardimage">
@@ -15,16 +28,12 @@ function FoodCard({ dish }) {
                     <button onClick ={handleFavorited} className="emoji-button favorite">☆</button>
                 )} */}
                 <strong>{dish.name}</strong>
-                <span>{dish.food}</span>
+                <p>{dish.food}</p>
+                <span>{meal.name}, {meal.time}{meal.tod}</span>
                 <span></span>
             </div>
         </li>
     )
-
-
-
-
-
 }
 
 

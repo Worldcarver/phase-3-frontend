@@ -1,14 +1,14 @@
 import React from "react";
-import MealCard from "./MealCard"
+//import MealCard from "./MealCard"
 import FoodCard from "./FoodCard"
 
-function MealDisplay({ meals, dishes }){
+function MealDisplay({  dishes }){
     return(
         <div className ="ui four column grid">
             <ul className="row">
-                {meals.map((meal) =>(
-                    <MealCard key={meal.id} meal={meal}/>
-                ))}
+                {/* {meals.map((meal) =>(
+                    <FoodCard key = {meal.id} meal={meal}/>
+                ))} */}
                 {dishes.map((dish)=>(
                     <FoodCard key={dish.id} dish={dish}/>
 
