@@ -1,19 +1,14 @@
 import './App.css';
 import MealDisplay from "./components/MealDisplay.js"
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 
 
 function App() {
-  const [meals, setMeals] = useState([])
   const [dishes, setDishes] = useState([])
 
-  useEffect(() =>{
-    fetch(`http://localhost:9292/meals`)
-      .then(res => res.json())
-      .then(data => setMeals(data))
-  }, [])
+
   useEffect(() =>{
     fetch(`http://localhost:9292/dishes`)
       .then(res => res.json())
@@ -22,7 +17,7 @@ function App() {
 
 
   return (
-    <MealDisplay meals={meals} dishes={dishes}/>
+    <MealDisplay dishes={dishes}/>
   )
   
 

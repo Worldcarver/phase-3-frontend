@@ -9,7 +9,8 @@ function FoodCard({ dish }) {
         fetch(`http://localhost:9292/dishes/${dish.id}/meal`)
           .then(res => res.json())
           .then(data => setMeal(data))
-      }, [dish.id])
+          console.log("sup")
+      }, [])
 
     
 
@@ -19,7 +20,7 @@ function FoodCard({ dish }) {
         <li className="card">
             <div className="cardimage">
                 <span className="dish"></span>
-                <img src={"temp"} alt={dish.name} />
+                <img src={dish.img} alt={dish.name} />
             </div>
             <div className="details">
                 {/* {favorited ? (
@@ -35,8 +36,5 @@ function FoodCard({ dish }) {
         </li>
     )
 }
-
-
-
 
 export default FoodCard
