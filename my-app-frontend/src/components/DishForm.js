@@ -4,8 +4,11 @@ import React, {useState} from "react";
 const DISH_URL = "http://localhost:9292/dishes";
 const initialNewDish = {
   id: 0,
-  description: '',
-  image: ''
+  name: '',
+  img: '',
+  food: '', 
+  day_id: '',
+  meai_id: ''
 };
 
 function DishForm ({ setDishes }) {
@@ -46,14 +49,14 @@ function DishForm ({ setDishes }) {
                 />
                 <input
                   type="text"
-                  name="description"
+                  name="food"
                   placeholder="Description"
                   value={newDish.food}
                   onChange={handleChange}
                 />
                 <input
                   type="text"
-                  name="image"
+                  name="img"
                   //step="0.01"
                   placeholder="Image URL"
                   value={newDish.img}
