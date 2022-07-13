@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react'
 
 function FoodCard({ dish }) {
     const [meal, setMeal] = useState([])
-   
+    const [isShown, setIsShown] = useState(false)
     useEffect(() =>{
         fetch(`http://localhost:9292/dishes/${dish.id}/meal`)
           .then(res => res.json())
@@ -12,7 +12,7 @@ function FoodCard({ dish }) {
           console.log("sup")
       }, [])
 
-    
+   
 
 
 
@@ -20,7 +20,15 @@ function FoodCard({ dish }) {
         <li className="card">
             <div className="cardimage">
                 <span className="dish"></span>
-                <img src={dish.img} alt={dish.name} />
+                <img src={dish.img} alt={dish.name}
+                onMouseEnter={() => setIsShown(true)}
+                onMouseLeave={()=> setIsShown(false)}
+                >
+             
+                </img>
+                {isShown && (
+                     <p>{dish.food}</p>
+                )}
             </div>
             <div className="details">
                 {/* {favorited ? (
@@ -28,8 +36,8 @@ function FoodCard({ dish }) {
                 ) : (
                     <button onClick ={handleFavorited} className="emoji-button favorite">☆</button>
                 )} */}
-                <strong>{dish.name}</strong>
-                <p>{dish.food}</p>
+                <strong>{dish.name} </strong>
+               
                 <span>{meal.name}, {meal.time}{meal.tod}</span>
                 <span></span>
             </div>
