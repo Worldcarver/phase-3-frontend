@@ -16,14 +16,14 @@ function FoodCard({ dish }) {
         <li className="card">
             <div className="cardimage">
                 <span className="dish"></span>
-                <img src={dish.img} alt={dish.name}
+                <img className = 'dishpic'src={dish.img} alt={dish.name}
                 onMouseEnter={() => setIsShown(true)}
                 onMouseLeave={()=> setIsShown(false)}
                 >
              
                 </img>
                 {isShown && (
-                     <p>{dish.food}</p>
+                     <p className='dishinfo'>{dish.food}</p>
                 )}
             </div>
             <div className="details">
@@ -35,8 +35,10 @@ function FoodCard({ dish }) {
                 <strong>{dish.name} </strong>
                
                 <span>{meal.name}, {meal.time}{meal.tod}</span>
-                <span></span>
             </div>
+            <br></br>
+            <br></br>
+            <br></br>
         </li>
     )
 }

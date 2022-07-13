@@ -14,6 +14,10 @@ function MealDisplay({  dishes }){
 
                 ))}
             </ul>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     )
 }

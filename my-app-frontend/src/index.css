@@ -45,11 +45,14 @@ img {
   grid-column-start: none;
   grid-column-end: none;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
   display: grid;
-  gap: 50px;
+  gap: 150px;
   list-style: none;
   justify-content: center;
+  
 }
+
 /* .row.fav-dest-row {
   padding: 1rem;
   grid-column-start: 1;
