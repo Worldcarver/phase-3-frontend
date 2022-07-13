@@ -1,13 +1,13 @@
 import './App.css';
 import MealDisplay from "./components/MealDisplay.js"
 import React, { useState, useEffect } from 'react';
-
-
+import Header from "./components/Header"
+import DishForm from './components/DishForm';
 
 
 function App() {
   const [dishes, setDishes] = useState([])
-
+ 
 
   useEffect(() =>{
     fetch(`http://localhost:9292/dishes`)
@@ -16,8 +16,22 @@ function App() {
   }, [])
 
 
+
+
+
+
+
+
+
+
+
   return (
-    <MealDisplay dishes={dishes}/>
+    <div className='app'>
+      <Header />
+      <DishForm setDishes ={setDishes}/>
+      <MealDisplay dishes={dishes}/>
+    
+    </div>
   )
   
 
@@ -26,7 +40,7 @@ function App() {
 //need routes for days
 //find images for food
 //setup seeds manually instead of faker /wrist
-
+//post, patch, delete
 
 
 

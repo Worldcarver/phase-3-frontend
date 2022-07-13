@@ -9,13 +9,9 @@ function FoodCard({ dish }) {
         fetch(`http://localhost:9292/dishes/${dish.id}/meal`)
           .then(res => res.json())
           .then(data => setMeal(data))
-          console.log("sup")
       }, [])
 
    
-
-
-
     return (
         <li className="card">
             <div className="cardimage">
