@@ -10,27 +10,14 @@ function Header(){
         .then(data => setDays(data))
       }, [])
     
-
     const dayList = days.map((day) =>
     <li key= {day.id}>{day.name}</li>
     )
 
     return(
-
         <ul className="daylist">
-
-
-
             {dayList}       
-        
-        
-        
         </ul>
-
-
-
-
-
     )
 }
 export default Header

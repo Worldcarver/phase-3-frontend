@@ -7,14 +7,26 @@ const initialNewDish = {
   name: '',
   img: '',
   food: '', 
-  day_id: '',
-  meai_id: ''
+  day_id: 0,
+  meal_id: 0
 };
 
-function DishForm ({ setDishes }) {
+function DishForm ({ setDishes, meals, days }) {
 
         const [newDish, setNewDish] = useState(initialNewDish);
-      
+
+        const mealNames = meals.map((meal) =>
+    <option key= {meal.id}>{meal.name}</option>
+    )
+    const mealTimes = meals.map((meal) =>
+    <option key= {meal.id}>{meal.time}</option>
+    )
+    const mealTimesOfDay = meals.map((meal) =>
+    <option key= {meal.id}>{meal.tod}</option>
+    )
+    const daysOf = days.map((day) =>
+    <option key= {day.id}>{day.name}</option>
+    )
         function handleChange(e) {
           setNewDish((currentNewDishState) => ({
             ...currentNewDishState,
@@ -57,11 +69,22 @@ function DishForm ({ setDishes }) {
                 <input
                   type="text"
                   name="img"
-                  //step="0.01"
                   placeholder="Image URL"
                   value={newDish.img}
                   onChange={handleChange}
                 />
+                <select>
+                    {mealNames}
+                </select>
+                <select>
+                   {mealTimes}
+                </select>
+                <select>
+                    {mealTimesOfDay}
+                </select>
+                <select>
+                   {daysOf}
+                </select>
                 <button type="submit">Add Dish</button>
               </form>
             </div>

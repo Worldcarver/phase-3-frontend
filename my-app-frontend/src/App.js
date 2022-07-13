@@ -7,20 +7,29 @@ import DishForm from './components/DishForm';
 
 function App() {
   const [dishes, setDishes] = useState([])
- 
+  const [meals, setMeals] = useState([])
+  const [days, setDays] = useState([])
 
   useEffect(() =>{
     fetch(`http://localhost:9292/dishes`)
       .then(res => res.json())
       .then(data => setDishes(data))
   }, [])
-
-
+  useEffect(() =>{
+    fetch(`http://localhost:9292/meals`)
+      .then(res => res.json())
+      .then(data => setMeals(data))
+  }, [])
+  useEffect(() =>{
+    fetch(`http://localhost:9292/days`)
+      .then(res => res.json())
+      .then(data => setDays(data))
+  }, [])
 
   return (
     <div className='app'>
       <Header />
-      <DishForm setDishes ={setDishes}/>
+      <DishForm setDishes ={setDishes} meals = {meals} days = {days}/>
       <MealDisplay dishes={dishes}/>
     
     </div>
