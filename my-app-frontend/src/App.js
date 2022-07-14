@@ -32,11 +32,13 @@ function App() {
           method: 'DELETE'
         })
   }
-
+  function onAddDish(newDish){
+    setDishes([...dishes, newDish])
+  }
   return (
     <div className='app'>
       <Header />
-      <DishForm setDishes ={setDishes} meals = {meals} days = {days} dishes = {dishes}/>
+      <DishForm onAddDish={onAddDish} />
       <MealDisplay dishes={dishes} deleteDish ={deleteDish}/>
     
     </div>
