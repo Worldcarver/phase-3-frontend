@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 // import MealDisplay from './MealDisplay'
 
 
-function FoodCard({ dish }) {
+function FoodCard({ dish, deleteDish }) {
     const [meal, setMeal] = useState([])
     const [isShown, setIsShown] = useState(false)
     useEffect(() =>{
@@ -11,7 +11,7 @@ function FoodCard({ dish }) {
           .then(data => setMeal(data))
       }, [])
 
-   
+    
     return (
         <li className="card">
             <div className="cardimage">
@@ -27,11 +27,15 @@ function FoodCard({ dish }) {
                 )}
             </div>
             <div className="details">
-                {/* {favorited ? (
-                    <button onClick ={handleFavorited} className="emoji-button favorite active">★</button>
-                ) : (
-                    <button onClick ={handleFavorited} className="emoji-button favorite">☆</button>
-                )} */}
+               
+                    <button 
+                    className="emoji-button delete active"
+                    onClick={(e) => { return deleteDish(dish.id), e.stopPropagation()}}
+                    >
+                        "🗑️"
+                        
+                        </button>
+               
                 <strong>{dish.name} </strong>
                
                 <span>{meal.name}, {meal.time}{meal.tod}</span>

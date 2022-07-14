@@ -25,12 +25,19 @@ function App() {
       .then(res => res.json())
       .then(data => setDays(data))
   }, [])
+  function deleteDish(id){
+      const deletedDish = dishes.filter((dish) => dish.id !== id)
+        setDishes(deletedDish)
+        fetch(`http://localhost:9292/dishes/${id}`, {
+          method: 'DELETE'
+        })
+  }
 
   return (
     <div className='app'>
       <Header />
-      <DishForm setDishes ={setDishes} meals = {meals} days = {days}/>
-      <MealDisplay dishes={dishes}/>
+      <DishForm setDishes ={setDishes} meals = {meals} days = {days} dishes = {dishes}/>
+      <MealDisplay dishes={dishes} deleteDish ={deleteDish}/>
     
     </div>
   )

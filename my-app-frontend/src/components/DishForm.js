@@ -1,31 +1,32 @@
 import React, {useState} from "react";
 
 
-const DISH_URL = "http://localhost:9292/dishes";
-const initialNewDish = {
-  id: 0,
-  name: '',
-  img: '',
-  food: '', 
-  day_id: 0,
-  meal_id: 0
-};
+// const DISH_URL = "http://localhost:9292/dishes";
+// const initialNewDish = {
+//   name: '',
+//   img: '',
+//   food: '', 
+//   day_id: "",
+//   meal_id: ""
+// };
 
-function DishForm ({ setDishes, meals, days }) {
 
-        const [newDish, setNewDish] = useState(initialNewDish);
+
+function DishForm ({ meals, days, dishes }) {
+
+        const [newDish, setNewDish] = useState([]);
 
         const mealNames = meals.map((meal) =>
-    <option key= {meal.id}>{meal.name}</option>
+    <option value={meal.id}>{meal.name}</option>
     )
     const mealTimes = meals.map((meal) =>
-    <option key= {meal.id}>{meal.time}</option>
+    <option value={meal.id}>{meal.time}</option>
     )
     const mealTimesOfDay = meals.map((meal) =>
-    <option key= {meal.id}>{meal.tod}</option>
+    <option value={meal.id}>{meal.tod}</option>
     )
     const daysOf = days.map((day) =>
-    <option key= {day.id}>{day.name}</option>
+    <option value={day.id}>{day.name}</option>
     )
         function handleChange(e) {
           setNewDish((currentNewDishState) => ({
@@ -33,25 +34,44 @@ function DishForm ({ setDishes, meals, days }) {
             [e.target.name]: e.target.value,
           }));
         }
-        function handleSubmit(e) {
-            e.preventDefault();
+        // function handleSubmit(e) {
+        //   e.preventDefault()
+        //   fetch("http://localhost:9292/dishes", {
+        //       method: "POST",
+        //       headers: {
+        //           "Content-Type": "application/json",
+        //       },
+        //       body: JSON.stringify({
+        //           food: dish.food,
+        //           name: dish.name, 
+        //           day_id: dish.day_id,
+        //           meal_id: dish.meal_id,
+        //           img: dish.img
+        //       }),
+        //   })
+        //   .then(r => r.json())
+        //   .then(newDish => setNewDish([newDish, ...dishes]))
+        // }
+        // function handleSubmit(e) {
+        //     e.preventDefault();
         
-            fetch(DISH_URL, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(newDish),
-            })
-              .then((resp) => resp.json())
-              .then((data) => setDishes((currentDish) => [...currentDish, data]));
+        //     fetch(DISH_URL, {
+        //       method: "POST",
+        //       headers: {
+        //         "Content-Type": "application/json",
+        //       },
+        //       body: JSON.stringify(newDish),
+        //     })
+        //       .then((resp) => resp.json())
+        //       .then((data) => setDishes((currentDish) => [...currentDish, data]));
         
-            setNewDish(initialNewDish);
-          }
+        //     setNewDish(initialNewDish);
+        //   }
           return (
             <div className="new-dish-form">  
               <h2>Add a New Dish</h2>
-              <form onSubmit={handleSubmit}>
+              {/* onSubmit={handleSubmit} */}
+              <form>
                 <input
                   type="text"
                   name="name"
@@ -76,13 +96,13 @@ function DishForm ({ setDishes, meals, days }) {
                 <select>
                     {mealNames}
                 </select>
-                <select>
+                <select value = {meals.id}>
                    {mealTimes}
                 </select>
-                <select>
+                <select value = {meals.id}>
                     {mealTimesOfDay}
                 </select>
-                <select>
+                <select value = {days.id}>
                    {daysOf}
                 </select>
                 <button type="submit">Add Dish</button>
