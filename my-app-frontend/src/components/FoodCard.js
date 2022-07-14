@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-// import MealDisplay from './MealDisplay'
+
 
 
 function FoodCard({ dish, deleteDish }) {
@@ -32,13 +32,15 @@ function FoodCard({ dish, deleteDish }) {
                     className="emoji-button delete active"
                     onClick={(e) => { return deleteDish(dish.id), e.stopPropagation()}}
                     >
-                        "🗑️"
+                        🗑️
                         
                         </button>
-               
+                        <button className='editbutton'>✏️</button>
+                    
                 <strong>{dish.name} </strong>
                
                 <span>{meal.name}, {meal.time}{meal.tod}</span>
+                
             </div>
             <br></br>
             <br></br>

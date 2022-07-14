@@ -3,12 +3,19 @@ import MealDisplay from "./components/MealDisplay.js"
 import React, { useState, useEffect } from 'react';
 import Header from "./components/Header"
 import DishForm from './components/DishForm';
-
+import EditForm from './components/EditForm'
 
 function App() {
   const [dishes, setDishes] = useState([])
   const [meals, setMeals] = useState([])
   const [days, setDays] = useState([])
+  const [formData, setFormData] = useState({
+    name: "",
+    food: "",
+    img: "",
+    meal_id: 1,
+    day_id: 1
+  });
 
   useEffect(() =>{
     fetch(`http://localhost:9292/dishes`)
@@ -32,27 +39,58 @@ function App() {
           method: 'DELETE'
         })
   }
+  function handleSubmit(e) {
+    e.preventDefault()
+    fetch("http://localhost:9292/dishes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+         ...formData
+        }),
+    })
+    .then(r => r.json())
+    .then(newDish => onAddDish(newDish));
+    setFormData({
+      name: "",
+      food: "",
+      img: "",
+      meal_id: 1,
+      day_id: 1
+  })
+  }
+
+function handleChange(e){
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+console.log(formData)};
+
+     
   function onAddDish(newDish){
     setDishes([...dishes, newDish])
+  }
+  function onEditDish(editedDish){
+    const editDish = dishes.map((dish)=>
+    dish.id === editedDish.id ? editedDish : dish
+    );
+    setDishes(editDish)
   }
   return (
     <div className='app'>
       <Header />
-      <DishForm onAddDish={onAddDish} />
+      <DishForm handleChange = {handleChange} handleSubmit = {handleSubmit} formData = {formData}/>
+      <EditForm onEditDish = {onEditDish}/>
       <MealDisplay dishes={dishes} deleteDish ={deleteDish}/>
     
     </div>
   )
   
 
-//not days for display prob
-//need navbar for days, and use meals for display
 //need routes for days
-//find images for food
-//setup seeds manually instead of faker /wrist
-//post, patch, delete
+//patch
 
-
+//move form state up, build edit form inside card
 
 
 }

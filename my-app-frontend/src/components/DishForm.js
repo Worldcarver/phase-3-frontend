@@ -1,96 +1,13 @@
 import React, {useState} from "react";
 
 
-// const DISH_URL = "http://localhost:9292/dishes";
-// const initialNewDish = {
-//   name: '',
-//   img: '',
-//   food: '', 
-//   day_id: "",
-//   meal_id: ""
-// };
-
-
-
-function DishForm ({ onAddDish }) {
-
-        // const [newDish, setNewDish] = useState([]);
-
-    //     const mealNames = meals.map((meal) =>
-    // <option value={meal.id}>{meal.name}</option>
-    // )
-    // const mealTimes = meals.map((meal) =>
-    // <option value={meal.id}>{meal.time}</option>
-    // )
-    // const mealTimesOfDay = meals.map((meal) =>
-    // <option value={meal.id}>{meal.tod}</option>
-    // )
-    // const daysOf = days.map((day) =>
-    // <option value={day.id}>{day.name}</option>
-    // )
-    const [formData, setFormData] = useState({
-      name: "",
-      food: "",
-      img: "",
-      meal_id: 1,
-      day_id: 1
-    });
-
-  function handleChange(e){
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-  console.log(formData)};
 
 
 
 
+function DishForm ({ handleChange, handleSubmit, formData }) {
 
 
-
-
-        // function handleChange(e) {
-        //   setNewDish((currentNewDishState) => ({
-        //     ...currentNewDishState,
-        //     [e.target.name]: e.target.value,
-        //   }));
-        // }
-        function handleSubmit(e) {
-          e.preventDefault()
-          fetch("http://localhost:9292/dishes", {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-               ...formData
-              }),
-          })
-          .then(r => r.json())
-          .then(newDish => onAddDish(newDish));
-          setFormData({
-            name: "",
-            food: "",
-            img: "",
-            meal_id: 1,
-            day_id: 1
-        })
-        }
-      
-        // function handleSubmit(e) {
-        //     e.preventDefault();
-        
-        //     fetch(DISH_URL, {
-        //       method: "POST",
-        //       headers: {
-        //         "Content-Type": "application/json",
-        //       },
-        //       body: JSON.stringify(newDish),
-        //     })
-        //       .then((resp) => resp.json())
-        //       .then((data) => setDishes((currentDish) => [...currentDish, data]));
-        
-        //     setNewDish(initialNewDish);
-        //   }
           return (
             <div className="new-dish-form">  
               <h2>Add a New Dish</h2>
