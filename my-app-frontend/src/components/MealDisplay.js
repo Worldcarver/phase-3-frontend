@@ -2,7 +2,7 @@ import React from "react";
 //import MealCard from "./MealCard"
 import FoodCard from "./FoodCard"
 
-function MealDisplay({  dishes, deleteDish }){
+function MealDisplay({  dishes, deleteDish, formData, handleChange, handleUpdate }){
     return(
         <div className ="ui five column grid">
             <ul className="row">
@@ -10,7 +10,7 @@ function MealDisplay({  dishes, deleteDish }){
                     <FoodCard key = {meal.id} meal={meal}/>
                 ))} */}
                 {dishes.map((dish)=>(
-                    <FoodCard key={dish.id} dish={dish} deleteDish={deleteDish}/>
+                    <FoodCard key={dish.id} dish={dish} deleteDish={deleteDish} formData={formData} handleChange={handleChange} handleUpdate={handleUpdate}/>
 
                 ))}
             </ul>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 
 
-function FoodCard({ dish, deleteDish }) {
+function FoodCard({ dish, deleteDish, formData, handleChange, handleUpdate }) {
     const [meal, setMeal] = useState([])
     const [isShown, setIsShown] = useState(false)
     useEffect(() =>{
@@ -10,8 +10,12 @@ function FoodCard({ dish, deleteDish }) {
           .then(res => res.json())
           .then(data => setMeal(data))
       }, [])
-
-    
+      function onEditDish(editedDish){
+        const editDish = dishes.map((dish)=>
+        dish.id === editedDish.id ? editedDish : dish
+        );
+        setDishes(editDish)
+      }
     return (
         <li className="card">
             <div className="cardimage">
@@ -35,8 +39,26 @@ function FoodCard({ dish, deleteDish }) {
                         🗑️
                         
                         </button>
-                        <button className='editbutton'>✏️</button>
-                    
+                        <button className='editbutton' onClick={() => setIsShown(true)}>✏️</button>
+                        {isShown && (
+                        <form onSubmit={onEditDish}>
+                                <select name = "meal_id" value = {formData.meal_id} onChange={handleChange}>
+                                    <option value = "1">Breakfast</option>
+                                     <option value = "2">Lunch</option>
+                                    <option value = "3">Dinner</option>
+                                </select>
+                                <select name = "day_id" value = {formData.day_id} onChange={handleChange}>
+                                    <option value = "1">Monday</option>
+                                    <option value = "2">Tuesday</option>
+                                    <option value = "3">Wednesday</option>
+                                    <option value = "4">Thursday</option>
+                                    <option value = "5">Friday</option>
+                                    <option value = "6">Saturday</option>
+                                    <option value = "7">Sunday</option>
+                                </select>
+                                <button type="submit">Edit Time</button>
+                            </form>
+                    )}
                 <strong>{dish.name} </strong>
                
                 <span>{meal.name}, {meal.time}{meal.tod}</span>

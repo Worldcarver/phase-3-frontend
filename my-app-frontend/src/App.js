@@ -3,7 +3,7 @@ import MealDisplay from "./components/MealDisplay.js"
 import React, { useState, useEffect } from 'react';
 import Header from "./components/Header"
 import DishForm from './components/DishForm';
-import EditForm from './components/EditForm'
+
 
 function App() {
   const [dishes, setDishes] = useState([])
@@ -70,18 +70,25 @@ console.log(formData)};
   function onAddDish(newDish){
     setDishes([...dishes, newDish])
   }
-  function onEditDish(editedDish){
-    const editDish = dishes.map((dish)=>
-    dish.id === editedDish.id ? editedDish : dish
-    );
-    setDishes(editDish)
+  function handleUpdate(e){
+    e.preventDefault()
+    fetch("http://localhost:9292/dishes", {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+         ...formData
+        }),
+    })
+    .then(r => r.json())
+    .then ( )
   }
   return (
     <div className='app'>
       <Header />
       <DishForm handleChange = {handleChange} handleSubmit = {handleSubmit} formData = {formData}/>
-      <EditForm onEditDish = {onEditDish}/>
-      <MealDisplay dishes={dishes} deleteDish ={deleteDish}/>
+      <MealDisplay dishes={dishes} deleteDish ={deleteDish} formData = {formData} handleChange ={handleChange} handleUpdate={handleUpdate}/>
     
     </div>
   )
