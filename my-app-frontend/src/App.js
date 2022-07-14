@@ -70,26 +70,22 @@ console.log(formData)};
   function onAddDish(newDish){
     setDishes([...dishes, newDish])
   }
-  function handleUpdate(e){
-    e.preventDefault()
-    fetch("http://localhost:9292/dishes", {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-         ...formData
-        }),
-    })
-    .then(r => r.json())
-    .then ( )
+
+  function onEditDish(editedDish){
+    const editDish = dishes.map((dish)=>
+    dish.id === editedDish.id ? editedDish : dish
+
+    );
+    console.log(dishes)
+    setDishes(editDish)
+    console.log(editDish)
   }
   return (
     <div className='app'>
       <Header />
       <DishForm handleChange = {handleChange} handleSubmit = {handleSubmit} formData = {formData}/>
-      <MealDisplay dishes={dishes} deleteDish ={deleteDish} formData = {formData} handleChange ={handleChange} handleUpdate={handleUpdate}/>
-    
+      <MealDisplay dishes={dishes} deleteDish ={deleteDish} formData = {formData} handleChange ={handleChange} onEditDish={onEditDish} />
+      
     </div>
   )
   

@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react'
 
 
 
-function FoodCard({ dish, deleteDish, formData, handleChange, handleUpdate }) {
+
+function FoodCard({ dish, deleteDish, formData, handleChange, onEditDish}) {
     const [meal, setMeal] = useState([])
     const [isShown, setIsShown] = useState(false)
     useEffect(() =>{
@@ -10,12 +11,23 @@ function FoodCard({ dish, deleteDish, formData, handleChange, handleUpdate }) {
           .then(res => res.json())
           .then(data => setMeal(data))
       }, [])
-      function onEditDish(editedDish){
-        const editDish = dishes.map((dish)=>
-        dish.id === editedDish.id ? editedDish : dish
-        );
-        setDishes(editDish)
+
+      function handleUpdate(e){
+        e.preventDefault()
+        fetch(`http://localhost:9292/dishes/${dish.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                meal_id: formData.meal_id,
+                day_id: formData.day_id
+            }),
+        })
+        .then(r => r.json())
+        .then(updatedDish => onEditDish(updatedDish) )
       }
+      setMeal(meal)
     return (
         <li className="card">
             <div className="cardimage">
@@ -41,7 +53,7 @@ function FoodCard({ dish, deleteDish, formData, handleChange, handleUpdate }) {
                         </button>
                         <button className='editbutton' onClick={() => setIsShown(true)}>✏️</button>
                         {isShown && (
-                        <form onSubmit={onEditDish}>
+                        <form onSubmit={handleUpdate}>
                                 <select name = "meal_id" value = {formData.meal_id} onChange={handleChange}>
                                     <option value = "1">Breakfast</option>
                                      <option value = "2">Lunch</option>
