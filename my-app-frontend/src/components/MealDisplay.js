@@ -2,7 +2,8 @@ import React from "react";
 //import MealCard from "./MealCard"
 import FoodCard from "./FoodCard"
 
-function MealDisplay({  dishes, deleteDish, formData, handleChange, onEditDish, mealSubmit, mealFormData, mealHandleChange, meals }){
+function MealDisplay({  dishes, deleteDish, formData, handleChange, mealSubmit, mealFormData, mealHandleChange, meals, onEditDish }){
+    console.log("display"+dishes)
     return(
         <div className ="ui five column grid">
             <ul className="row">
@@ -10,7 +11,7 @@ function MealDisplay({  dishes, deleteDish, formData, handleChange, onEditDish, 
                     <FoodCard key = {meal.id} meal={meal}/>
                 ))} */}
                 {dishes.map((dish)=>(
-                    <FoodCard key={dish.id} dish={dish} meals={meals} deleteDish={deleteDish} formData={formData} handleChange={handleChange}  onEditDish ={onEditDish} mealSubmit={mealSubmit} mealFormData={mealFormData} mealHandleChange={mealHandleChange} />
+                    <FoodCard key={dish.id} dish={dish} meals={meals} deleteDish={deleteDish} formData={formData} handleChange={handleChange}  mealSubmit={mealSubmit} mealFormData={mealFormData} mealHandleChange={mealHandleChange} onEditDish={onEditDish} />
                    
                 ))}
             </ul>

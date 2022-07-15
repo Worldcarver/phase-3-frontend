@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react'
 
 
+//meals,
 
-
-function FoodCard({ dish, deleteDish, formData, handleChange, onEditDish, mealSubmit, mealFormData, mealHandleChange, meals }) {
-    // const [meal, setMeal] = useState([])
+function FoodCard({ dish, deleteDish, formData, handleChange, onEditDish, mealSubmit, mealFormData, mealHandleChange}) {
+    const [meal, setMeal] = useState([])
     const [isShown, setIsShown] = useState(false)
     const [formIsShown, setFormIsShown] = useState(false)
-    // useEffect(() =>{
-    //     fetch(`http://localhost:9292/dishes/${dish.id}/meal`)
-    //       .then(res => res.json())
-    //       .then(data => setMeal(data))
-    //   }, [])
-        const updatedMeal = meals.filter(meal=>meal.id === dish.meal_id)
+    useEffect(() =>{
+        fetch(`http://localhost:9292/dishes/${dish.id}/meal`)
+          .then(res => res.json())
+          .then(data => setMeal(data))
+      }, [])
+        // const updatedMeal = meals.filter(meal=>meal.id === dish.meal_id)
     
 
 
@@ -107,7 +107,7 @@ function FoodCard({ dish, deleteDish, formData, handleChange, onEditDish, mealSu
                             )}
                 <strong>{dish.name} </strong>
                
-                <span>{updatedMeal.name}, {updatedMeal.time}{updatedMeal.tod}</span>
+                <span>{meal.name}, {meal.time}{meal.tod}</span>
                 
             </div>
             <br></br>

@@ -102,8 +102,9 @@ function App() {
     const editDish = dishes.map((dish)=>
     dish.id === editedDish.id ? editedDish : dish
     );
+    console.log(editDish)
+    //setMeals(meals)
     setDishes(editDish)
-    setMeals(meals)
   }
   return (
     <div className='app'>
