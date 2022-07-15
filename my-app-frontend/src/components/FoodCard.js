@@ -3,16 +3,20 @@ import React, {useEffect, useState} from 'react'
 
 
 
-function FoodCard({ dish, deleteDish, formData, handleChange, onEditDish}) {
-    const [meal, setMeal] = useState([])
+function FoodCard({ dish, deleteDish, formData, handleChange, onEditDish, mealSubmit, mealFormData, mealHandleChange, meals }) {
+    // const [meal, setMeal] = useState([])
     const [isShown, setIsShown] = useState(false)
-    useEffect(() =>{
-        fetch(`http://localhost:9292/dishes/${dish.id}/meal`)
-          .then(res => res.json())
-          .then(data => setMeal(data))
-      }, [])
+    const [formIsShown, setFormIsShown] = useState(false)
+    // useEffect(() =>{
+    //     fetch(`http://localhost:9292/dishes/${dish.id}/meal`)
+    //       .then(res => res.json())
+    //       .then(data => setMeal(data))
+    //   }, [])
+        const updatedMeal = meals.filter(meal=>meal.id === dish.meal_id)
+    
 
-      function handleUpdate(e){
+
+        function handleUpdate(e){
         e.preventDefault()
         fetch(`http://localhost:9292/dishes/${dish.id}`, {
             method: "PATCH",
@@ -27,7 +31,7 @@ function FoodCard({ dish, deleteDish, formData, handleChange, onEditDish}) {
         .then(r => r.json())
         .then(updatedDish => onEditDish(updatedDish) )
       }
-      setMeal(meal)
+      
     return (
         <li className="card">
             <div className="cardimage">
@@ -51,12 +55,12 @@ function FoodCard({ dish, deleteDish, formData, handleChange, onEditDish}) {
                         🗑️
                         
                         </button>
-                        <button className='editbutton' onClick={() => setIsShown(true)}>✏️</button>
-                        {isShown && (
+                        <button className='editbutton' onClick={() => setFormIsShown(true)}>✏️</button>
+                        {formIsShown && (
                         <form onSubmit={handleUpdate}>
                                 <select name = "meal_id" value = {formData.meal_id} onChange={handleChange}>
                                     <option value = "1">Breakfast</option>
-                                     <option value = "2">Lunch</option>
+                                    <option value = "2">Lunch</option>
                                     <option value = "3">Dinner</option>
                                 </select>
                                 <select name = "day_id" value = {formData.day_id} onChange={handleChange}>
@@ -70,10 +74,40 @@ function FoodCard({ dish, deleteDish, formData, handleChange, onEditDish}) {
                                 </select>
                                 <button type="submit">Edit Time</button>
                             </form>
-                    )}
+                            )}
+                            {formIsShown && (
+                                <form onSubmit={mealSubmit}>
+                                    
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Meal Name"
+                                        value={mealFormData.name}
+                                        onChange={mealHandleChange}
+                                        />
+                                 
+                                    <input
+                                        type="text"
+                                        name="time"
+                                        placeholder="Meal Time"
+                                        value={mealFormData.time}
+                                        onChange={mealHandleChange}
+                                        />
+                                        <input
+                                        type="text"
+                                        name="tod"
+                                        placeholder="am or pm"
+                                        value={mealFormData.tod}
+                                        onChange={mealHandleChange}
+                                        />
+                                   
+                                    <button type="submit">Add a Meal</button>
+                                    <button type ="button" onClick={(e) => { return setFormIsShown(false), e.stopPropagation()}}>Cancel</button>
+                                </form>
+                            )}
                 <strong>{dish.name} </strong>
                
-                <span>{meal.name}, {meal.time}{meal.tod}</span>
+                <span>{updatedMeal.name}, {updatedMeal.time}{updatedMeal.tod}</span>
                 
             </div>
             <br></br>
